@@ -21,7 +21,7 @@ char **setexecveArgs(char *lineptr)
 	{
 		argv = realloc(argv, (i + 2) * sizeof(char *));
 		if (argv == NULL)
-			return NULL;
+			return (NULL);
 
 		argv[i] = malloc(strlen(token) + 1);
 		if (argv[i] == NULL)
@@ -35,31 +35,6 @@ char **setexecveArgs(char *lineptr)
 	argv[i] = NULL;
 	return (argv);
 }
-
-/*
-char **setexecveArgs(char *lineptr)
-{
-	char *token;
-	int i = 0;
-	char **argv = malloc(sizeof(char *));
-
-	if (lineptr == NULL)
-		return (NULL);
-	token = strtok(lineptr, " \t\n");
-
-	while (token != NULL)
-	{
-		argv[i] = malloc(strlen(token) + 1);
-		if (argv[i] == NULL)
-			return (NULL);
-		strcpy(argv[i], token);
-		token = strtok(NULL, " \t\n");
-		i++;
-	}
-	argv[i] = NULL;
-	return (argv);
-}
-*/
 
 /**
  * print_env - Prints each environment variable separately

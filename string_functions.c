@@ -26,21 +26,22 @@ char *_strcat(char *s, char *str)
 	len1 = _strlen(s);
 	len2 = _strlen(str);
 
-  newVersion = malloc(len1 + len2 + 1);
-  if (newVersion == NULL) {
-    return (NULL);
-  }
+	newVersion = malloc(len1 + len2 + 1);
+	if (newVersion == NULL)
+		return (NULL);
 
-  for (i = 0; i < len1; i++) {
-    newVersion[i] = s[i];
-  }
+	for (i = 0; i < len1; i++)
+	{
+		newVersion[i] = s[i];
+	}
 
-  for (j = 0; j < len2; j++) {
-    newVersion[len1 + j] = str[j];
-  }
+	for (j = 0; j < len2; j++)
+	{
+		newVersion[len1 + j] = str[j];
+	}
 
-  newVersion[len1 + len2] = '\0';
-  return (newVersion);
+	newVersion[len1 + len2] = '\0';
+	return (newVersion);
 }
 /**
  * _strcpy - Copies a string from source to destination
@@ -48,18 +49,21 @@ char *_strcat(char *s, char *str)
  * @src: The source string to be copied
  * Return: A pointer to the destination string
  */
-char *_strcpy(char *dest, char *src) {
-  int l = 0;
-  int x = 0;
+char *_strcpy(char *dest, char *src)
+{
+	int l = 0;
+	int x = 0;
 
-  while (*(src + l) != '\0') {
-    l++;
-  }
-  for (; x < l; x++) {
-    dest[x] = src[x];
-  }
-  dest[l] = '\0';
-  return (dest);
+	while (*(src + l) != '\0')
+	{
+		l++;
+	}
+	for (; x < l; x++)
+	{
+		dest[x] = src[x];
+	}
+	dest[l] = '\0';
+	return (dest);
 }
 /**
  * _strcmp - Compares two strings
@@ -69,15 +73,17 @@ char *_strcpy(char *dest, char *src) {
  *         if s1 is found to be less than, equal to, or greater than s2
  */
 
-int _strcmp(char *s1, const char *s2) {
-  int i = 0;
+int _strcmp(char *s1, const char *s2)
+{
+	int i = 0;
 
-  while (s1[i] != '\0' && s2[i] != '\0') {
-    if (s1[i] != s2[i])
-      return (s1[i] - s2[i]);
-    i++;
-  }
-  return (s1[i] - s2[i]);
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (s1[i] - s2[i]);
 }
 
 /**
@@ -87,14 +93,15 @@ int _strcmp(char *s1, const char *s2) {
  * Return: 0 if 'str' is found at the beginning of 's', -1 otherwise
  */
 
-int str_containe(char *s, char *str) {
-  int i = 0;
+int str_containe(char *s, char *str)
+{
+	int i = 0;
 
-  while (i < _strlen(str)) {
-    if (str[i] != s[i]) {
-      return (-1);
-    }
-    i++;
-  }
-  return (0);
+	while (i < _strlen(str))
+	{
+		if (str[i] != s[i])
+			return (-1);
+		i++;
+	}
+	return (0);
 }
