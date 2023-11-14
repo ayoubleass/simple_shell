@@ -1,4 +1,23 @@
 #include "main.h"
+/**
+ * freeArguments - Frees the memory allocated
+ * for an array of strings and the array itself.
+ * @argv: The array of strings to be freed.
+ *
+ * This function iterates through the array of strings pointed to by argv
+ * and frees the memory allocated for each string. Finally, it frees the
+ * memory allocated for the array itself.
+ */
+void freeArguments(char **argv)
+{
+	int i;
+	if(argv[0])
+	{
+		for (i = 0; argv[i] != NULL; i++)
+			free(argv[i]);
+	}
+	free(argv);
+}
 
 /**
  * setexecveArgs - Tokenizes a string into an array of arguments for execve
@@ -6,34 +25,38 @@
  * Return: A dynamically allocated array of strings (arguments), or NULL on
  * failure
  */
-char **setexecveArgs(char *lineptr)
+void setexecveArgs(char *lineptr,char **argv)
 {
 	char *token;
 	int i = 0;
-	char **argv = malloc(sizeof(char *));
 
 	if (lineptr == NULL)
-		return (NULL);
-
+	{
+		free(argv);
+		return;
+	}
 	token = strtok(lineptr, " \t\n");
 
 	while (token != NULL)
 	{
-		argv = realloc(argv, (i + 2) * sizeof(char *));
 		if (argv == NULL)
-			return (NULL);
+		{
+			freeArguments(argv);
+			return;
+		}
 
 		argv[i] = malloc(strlen(token) + 1);
 		if (argv[i] == NULL)
-			return (NULL);
-
+		{
+			freeArguments(argv);
+			return;
+		}
 		strcpy(argv[i], token);
 		token = strtok(NULL, " \t\n");
 		i++;
 	}
 
 	argv[i] = NULL;
-	return (argv);
 }
 
 /**
@@ -68,6 +91,8 @@ void print_env(char **env)
  */
 void removenewtag(char *lineptr, ssize_t linelen)
 {
+	if (linelen == 0)
+		return;
 	if (linelen > 0 && lineptr[linelen - 1] == '\n')
 	{
 		lineptr[linelen - 1] = '\0';

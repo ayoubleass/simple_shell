@@ -27,11 +27,12 @@ char *_getenv(char *name);
 int _setenv(const char *name, const char *value, int overwrite);
 char *handleCommand(char *path_copy, char *lineptr);
 
-char **setexecveArgs(char *lineptr);
+void setexecveArgs(char *lineptr,char **argv);
+void execute_cmd_with_no_arg(char *lineptr,char *filename);
 void removenewtag(char *lineptr, ssize_t linelen);
-void execute_stdn_cmd(char *lineptr, char *filename, int *status);
-
-
+void execute_stdn_cmd(char **argv, char *filename, int *status);
+void print_env(char **env);
+void freeArguments(char **argv);
 
 
 #endif
