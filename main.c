@@ -51,31 +51,23 @@ int main(int argc, char **argv)
 	{
 		if (isatty(fileno(stdin)) == 1)
 		{
-			int status;
+			/*int status;*/
 			ssize_t len;
-			char **arguments;
+			/*char **arguments;*/
 
-			printf("$ ");
+			printf("#cisfun$ ");
 			len = getline(&lineptr, &n, stdin);
 			removenewtag(lineptr, strlen(lineptr));
-			arguments = setexecveArgs(lineptr);
+			/*arguments = setexecveArgs(lineptr);*/
 			if (len == EOF)
 			{
 				free(lineptr);
 				_putchar('\n');
 				exit(EXIT_SUCCESS);
 			}
-			else if (arguments[0] && strcmp(arguments[0], "exit") == 0)
-			{
-				status = arguments[1] ? atoi(arguments[1]) : 0;
-				exitShell(status, arguments);
-			}
-			else if (strcmp(lineptr, "env") == 0)
-				print_env(environ);
 			else
 			{
-				if (arguments[0])
-					execute_stdn_cmd(arguments, argv[0], &status);
+				execute_cmd_no_arguments(lineptr, argv[0]);
 			}
 		}
 		else

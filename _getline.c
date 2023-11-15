@@ -1,6 +1,12 @@
 #include "main.h"
 #include <string.h>
-
+/**
+ * _getline - Read a line from a stream.
+ * @lineptr: A pointer to the buffer storing the line.
+ * @n: A pointer to the size of the buffer.
+ * @stream: The input stream to read from.
+ * Return: the size of the buffer
+ */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
 	char ch;
