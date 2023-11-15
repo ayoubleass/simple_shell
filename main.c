@@ -17,8 +17,8 @@ int main(int argc, char **argv)
 		/*int status;*/
 		ssize_t len;
 		/*char **arguments;*/
-		if (isatty(fileno(stdin)) == 1)
-			printf("#cisfun$ ");
+		/*if (isatty(fileno(stdin)) == 1)*/
+		printf("#cisfun$ ");
 		len = getline(&lineptr, &n, stdin);
 		lineptr[len - 1] = '\0';
 		/*arguments = setexecveArgs(lineptr);*/
