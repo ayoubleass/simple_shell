@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	{
 		ssize_t len;
 
-		printf("#cisfun$ ");
+		printf("$ ");
 		len = getline(&lineptr, &n, stdin);
 		lineptr[len - 1] = '\0';
 		if (len == EOF)
