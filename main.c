@@ -30,6 +30,9 @@ int main(int argc, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 		else
-			execute_cmd_no_arguments(lineptr, argv[0]);
+		{
+			if(lineptr != NULL && lineptr[0] != '\0')
+				execute_cmd_no_arguments(lineptr, argv[0]);
+		}
 	}
 }
