@@ -29,7 +29,7 @@ int _setenv(const char *name, const char *value, int overwrite);
 char *handleCommand(char *path_copy, char *lineptr);
 
 char **setexecveArgs(char *lineptr);
-void execute_cmd_no_arguments(char *lineptr, char *filename);
+void execute_cmd_no_arguments(char *lineptr, char *filename, char **argv);
 void removenewtag(char *lineptr, ssize_t linelen);
 void execute_stdn_cmd(char **argv, char *filename, int *status);
 void print_env(char **env);

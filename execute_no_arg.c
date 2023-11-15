@@ -7,13 +7,19 @@
  *
  */
 
-void execute_cmd_no_arguments(char *lineptr, char *filename)
+void execute_cmd_no_arguments(char *lineptr, char *filename, char **argv)
 {
 	pid_t childpid;
-	char **cmd = malloc(2 * sizeof(char *));
+	char **cmd;
 
-	cmd[0] = lineptr;
-	cmd[1] = NULL;
+	if (argv == NULL)
+	{
+		cmd = malloc(2 * sizeof(char *));
+		cmd[0] = lineptr;
+		cmd[1] = NULL;
+	}
+	else
+		cmd = setexecveArgs(lineptr);
 
 	childpid = fork();
 	if (childpid == -1)
