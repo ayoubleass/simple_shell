@@ -10,12 +10,20 @@
  */
 void freeArguments(char **argv)
 {
-	int i;
-	if(argv[0])
+	int i = 0;
+
+	if (argv == NULL)
+		return;
+	while (argv[i] != NULL)
 	{
-		for (i = 0; argv[i] != NULL; i++)
+		if (argv[i] && argv[i] != NULL)
+		{
 			free(argv[i]);
+			argv[i] = NULL;
+		}
+		i++;
 	}
+
 	free(argv);
 }
 
@@ -25,40 +33,46 @@ void freeArguments(char **argv)
  * Return: A dynamically allocated array of strings (arguments), or NULL on
  * failure
  */
-void setexecveArgs(char *lineptr,char **argv)
+char **setexecveArgs(char *lineptr)
 {
 	char *token;
 	int i = 0;
+	char **argv;
 
-	if (lineptr == NULL)
-	{
-		free(argv);
-		return;
-	}
-	token = strtok(lineptr, " \t\n");
+	if (lineptr == NULL || lineptr[0] == '\0')
+		return (NULL);
 
-	while (token != NULL)
+	argv = malloc(sizeof(char *) * INITIAL_SIZE);
+	if (argv == NULL)
+		return (NULL);
+
+	while ((token = strtok(lineptr, " \t\n")) != NULL)
 	{
-		if (argv == NULL)
+		if (i >= INITIAL_SIZE)
 		{
-			freeArguments(argv);
-			return;
-		}
+			char **temp = realloc(argv, sizeof(char *) * (i + 1));
 
+			if (temp == NULL)
+			{
+				freeArguments(argv);
+				return (NULL);
+			}
+			argv = temp;
+		}
 		argv[i] = malloc(strlen(token) + 1);
 		if (argv[i] == NULL)
 		{
 			freeArguments(argv);
-			return;
+			return (NULL);
 		}
 		strcpy(argv[i], token);
-		token = strtok(NULL, " \t\n");
+		lineptr = NULL;
 		i++;
 	}
 
 	argv[i] = NULL;
+	return (argv);
 }
-
 /**
  * print_env - Prints each environment variable separately
  *
