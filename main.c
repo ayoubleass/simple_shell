@@ -17,12 +17,13 @@ int main(int argc, char **argv)
 	{
 		/*int status;*/
 		ssize_t len;
-		/*char **arguments;*/
+		char **arguments;
+
 		if (isatty(fileno(stdin)) == 1)
 			printf("#cisfun$ ");
 		len = getline(&lineptr, &n, stdin);
 		lineptr[len - 1] = '\0';
-		/*arguments = setexecveArgs(lineptr);*/
+		arguments = setexecveArgs(lineptr);
 		if (len == EOF)
 		{
 			free(lineptr);
@@ -33,7 +34,7 @@ int main(int argc, char **argv)
 		{
 			if (lineptr != NULL && lineptr[0] != '\0')
 			{
-				execute_cmd_no_arguments(lineptr, argv[0], NULL);
+				execute_cmd_no_arguments(lineptr, argv[0], arguments);
 				if (isatty(fileno(stdin)) != 1)
 				{
 					free(lineptr);
