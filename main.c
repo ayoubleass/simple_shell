@@ -15,8 +15,8 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		ssize_t len;
-
-		printf("$ ");
+		if (isatty(fileno(stdin)) == 1)
+			printf("$ ");
 		len = getline(&lineptr, &n, stdin);
 		lineptr[len - 1] = '\0';
 		if (len == EOF)
