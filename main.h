@@ -34,6 +34,7 @@ void removenewtag(char *lineptr, ssize_t linelen);
 void execute_stdn_cmd(char **argv, char *filename, int *status);
 void print_env(char **env);
 void freeArguments(char **argv);
-
+void exitShell(int status, char **argv);
+void piped_cmd(char *lineptr, size_t n, char *filename);
 
 #endif
