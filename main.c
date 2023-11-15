@@ -26,14 +26,7 @@ int main(int argc, char **argv)
 			exit(EXIT_SUCCESS);
 		}
 		else
-		{
 			execute_cmd_no_arguments(lineptr, argv[0], NULL);
-			if (isatty(fileno(stdin)) != 1)
-			{
-				free(lineptr);
-				exit(EXIT_SUCCESS);
-			}
-		}
 	}
 	return (0);
 }

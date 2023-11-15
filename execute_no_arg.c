@@ -32,6 +32,11 @@ void execute_cmd_no_arguments(char *lineptr, char *filename, char **argv)
 			free(cmd);
 			exit(EXIT_FAILURE);
 		}
+		if(isatty(fileno(stdin)) != 1)
+		{
+			free(cmd);
+			exit(0);
+		}
 	}
 	else
 		wait(NULL);
