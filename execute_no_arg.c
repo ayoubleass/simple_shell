@@ -15,7 +15,7 @@ void execute_cmd_no_arguments(char *lineptr, char *filename, char **argv)
 	if (argv == NULL)
 	{
 		cmd = malloc(2 * sizeof(char *));
-		cmd[0] = lineptr;
+		cmd[0] = _remove(lineptr," ");
 		cmd[1] = NULL;
 	}
 	else

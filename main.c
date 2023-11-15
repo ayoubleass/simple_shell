@@ -15,14 +15,15 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		ssize_t len;
-		if (isatty(fileno(stdin)) == 1)
-			printf("$ ");
+
+		printf("#cisfun$ ");
 		len = getline(&lineptr, &n, stdin);
 		lineptr[len - 1] = '\0';
 		if (len == EOF)
 		{
 			free(lineptr);
-			_putchar('\n');
+			if (isatty(fileno(stdin)))
+				_putchar('\n');
 			exit(EXIT_SUCCESS);
 		}
 		else

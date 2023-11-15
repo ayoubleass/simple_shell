@@ -36,5 +36,6 @@ void print_env(char **env);
 void freeArguments(char **argv);
 void exitShell(int status, char **argv);
 void piped_cmd(char *lineptr, size_t n, char *filename);
+char *_remove(char *str, char *delim);
 
 #endif
