@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 				_putchar('\n');
 			exit(EXIT_SUCCESS);
 		}
-		execute_cmd_no_arguments(lineptr, argv[0]);
+		else
+			execute_cmd_no_arguments(lineptr, argv[0]);
 	}
 }
