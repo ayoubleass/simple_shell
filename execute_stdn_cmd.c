@@ -7,7 +7,7 @@
  * @status: A pointer to an integer where
  * the status of the executed command will be stored.
  */
-void execute_stdn_cmd(char **argv, char *filename, int *status)
+void  execute_stdn_cmd(char **argv, char *filename, int *status)
 {
 	static int count;
 	char *pathcpy = malloc(strlen(getenv("PATH")) + 1);
@@ -21,6 +21,7 @@ void execute_stdn_cmd(char **argv, char *filename, int *status)
 		count = 0;
 		count++;
 		printf("%s: %d: %s: not found\n", filename, count, argv[0]);
+		*status = 127;
 	}
 	else
 	{
@@ -28,7 +29,10 @@ void execute_stdn_cmd(char **argv, char *filename, int *status)
 		if (childpid == -1)
 			perror("fork");
 		else if (childpid == 0)
-			execve(cmd, argv, environ);
+		{
+			if (execve(cmd, argv, environ) == 0)
+				status = 0;
+		}
 		else
 			waitpid(childpid, status, 0);
 	}

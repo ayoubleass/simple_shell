@@ -24,7 +24,8 @@ void execute_cmd_no_arguments(char *lineptr, char *filename, char **argv)
 		perror("fork");
 	else if (childpid == 0)
 	{
-		if (!execve((cmd != NULL) ? cmd[0] : argv[0], (cmd != NULL) ? cmd : argv, environ))
+		if (!execve((cmd != NULL) ? cmd[0]
+			: argv[0], (cmd != NULL) ? cmd : argv, environ))
 		{
 			perror(filename);
 			free(cmd);
