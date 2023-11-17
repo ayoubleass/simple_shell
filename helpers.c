@@ -81,17 +81,10 @@ char **setexecveArgs(char *lineptr)
 void print_env(char **env)
 {
 	int i = 0;
-	int j;
 
 	while (env[i] != NULL)
 	{
-		j = 0;
-		while (env[i][j] != '\0')
-		{
-			_putchar(env[i][j]);
-			j++;
-		}
-		_putchar('\n');
+		printf("%s\n", env[i]);
 		i++;
 	}
 }
