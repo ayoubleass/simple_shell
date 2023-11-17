@@ -38,14 +38,12 @@ int main(int argc, char **argv)
 			arguments = setexecveArgs(lineptr);
 			if (len == EOF)
 				disconnect(&lineptr, status);
-			else if (str_containe(lineptr, "exit") == 0)
+			if (arguments && checkisBuildin(arguments[0] ? arguments[0] : lineptr))
 			{
 				status = arguments[1] ? atoi(arguments[1]) : status;
-				free(lineptr);
-				exitShell(status, arguments);
+				handleBuildinCmd(arguments[0], status, arguments);
+
 			}
-			else if (strcmp(lineptr, "env") == 0)
-				print_env(environ);
 			else
 			{
 				if (arguments != NULL && arguments[0])

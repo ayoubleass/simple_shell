@@ -35,3 +35,46 @@ void piped_cmd(char *lineptr, size_t n, char *filename)
 	free(lineptr);
 	exit(EXIT_SUCCESS);
 }
+
+/**
+ * checkisBuildin - Checks if a given
+ * command is a built-in command in a simple shell.
+ * @cmd: The command to be checked.
+ * Return: 1 if there is a match or 0 if not
+ */
+int checkisBuildin(char *cmd)
+{
+	char buildin[][5] = {"exit", "env"};
+	size_t i;
+
+	for (i = 0; i < sizeof(buildin) / sizeof(buildin[0]); ++i)
+	{
+		if (strcmp(buildin[i], cmd) == 0)
+			return (1);
+	}
+
+	return (0);
+}
+
+
+/**
+ * handleBuildinCmd - Executes built-in commands based on the given command.
+ * @cmd: The command to be handled.
+ * @status: The exit status of the previous command.
+ * @args: Array of arguments (if any) associated with the command.
+ */
+
+void handleBuildinCmd(char *cmd, int status, char **args)
+{
+	if (strcmp(cmd, "env") == 0)
+		print_env(environ);
+	else if (strcmp(cmd, "exit") == 0)
+	{
+		freeArguments(args);
+		exit(status);
+
+	}
+}
+
+
+
